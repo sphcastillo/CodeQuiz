@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>The Tudor Dynasty</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+
+</head>
+<body>
+    <!--The header that's one every page-->
+    <div class="container">
+        <div class="row">
+            <div class="card-body d-flex justify-content-start col-md-6">
+                <a type="button" id="viewHighScores">View High Scores</a>
+            </div>
+            <div class="card-body d-flex justify-content-end col-md-6">
+                <p id="timerCountdown"></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--The Quiz Question Template-->
+    <main>
+
+        <!--Quiz Opening Page-->
+        <div class="container">
+
+            <h1 id="letsStart">The Tudors</h1>
+            <p id="directions">Test your Tudor knowledge in this comprehensive Tudor Quiz! Learn even from wrong answers! Keep in mind that incorrect answers will penalize your score time by 10 seconds. Good luck!</p>
+            <a href="#" id="quizOpenerStartButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Start Quiz</a>
+        </div>
+
+
+    <!--Questions / Answer Options-->
+        <h5 id="theQuestion"></h5>
+        <div class ="row">
+            <div id="insideQuestionContent" class="col-8">
+                <div id="listofOptions" class="list-group">
+                    <button id="firstOption" type="button" class="list-group-item list-group-item-action answerOption"></button>
+                    <button id="secondOption" type="button" class="list-group-item list-group-item-action answerOption"></button>
+                    <button id="thirdOption" type="button" class="list-group-item list-group-item-action answerOption"></button>
+                    <button id="fourthOption" type="button" class="list-group-item list-group-item-action answerOption"></button>
+                    <!-- <button id="correct"></button> -->
+                </div>
+            </div>
+        </div>
+        <h3 id="theCorrectAnswer"></h3>
+
+
+        <!--The User's Final Score-->
+        <div class="container">
+            <h1 id="done">All done!</h1>
+            <p>Your final score is: </p>
+            <p id="yourIndividualFinalScore"></p>
+
+            <div  id="savingUserName">
+                <label for="saveUserScore" id="letUsSaveUserScore">Enter your name: </label>
+                <input type="name" class="form-control" id="userName">
+            </div>
+            <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+
+        </div>
+
+    
+<!--Page where you can view list of highest scores-->
+<!--Find options to restart or clear all data-->
+        <div class="highScores">
+            <h1>Highscores</h1>
+            <button id="goBackButton" type="button" class="btn btn-primary">Go Back</button>
+            <button id="clearTheScores" type="button" class="btn btn-primary">Clear Highscores</button>
+
+        </div>
+    </main>
+
+
+<script type="text/javascript" src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+    
+</body>
+</html>
