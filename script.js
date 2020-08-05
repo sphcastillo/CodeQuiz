@@ -151,6 +151,7 @@ var secondsLeftOnTimer = 60;
 
 var namesArray = [];
 localStorage.setItem("names", JSON.stringify(namesArray));
+var data = JSON.parse(localStorage.getItem("names"));
 
 
 
@@ -240,7 +241,7 @@ function checkButtonAnswers(){
 
 
 // when  you get the incorrect answer
-function  answerIncorrect(){
+function answerIncorrect(){
 
     secondsLeftOnTimer  -= 10;
 
@@ -266,7 +267,13 @@ submitButton.addEventListener("click", function(){
     localStorage.setItem("names",JSON.stringify(namesArray));
 
     scoreKeeper(userNameInput.value);
-    
+    userNameInput.value = "";
+
+    data.forEach(function(name){
+        scoreKeeper(name);
+        console.log("name", name);
+    })
+
 
 })
 
@@ -306,6 +313,9 @@ clearScoresButton.addEventListener("click",function(){
 
     localStorage.clear();
     // as well as removing from browser
+    while(scoresGoHere.firstChild){
+        scoreKeeper.removeChild(scoresGoHere.firstChild);
+    }
 
 
 })
