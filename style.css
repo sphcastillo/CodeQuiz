@@ -1,0 +1,7 @@
+.container {
+    display: none;
+}
+
+.container:target {
+    display: block;
+}

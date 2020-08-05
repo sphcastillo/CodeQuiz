@@ -135,7 +135,7 @@ var submitButton = document.getElementById("submitButton");
 
 // Viewing list of the highest scores //
 
-var highScorePage = document.getElementsByClassName("highScores");
+var highScorePage = document.getElementById("highScores");
 
 var scoresGoHere = document.getElementById("scoresGoHere");
 
@@ -250,12 +250,11 @@ function answerIncorrect(){
 
 
 //userNameInput
-function scoreKeeper(){
+function scoreKeeper(text){
 
     var li = document.createElement("li");
     li.textContent = text;
     scoresGoHere.appendChild(li);
-
 
 }
 
@@ -293,28 +292,26 @@ theStartButton.addEventListener("click", function(){
 
 })
 
-submitButton.addEventListener("click", function(){
-    console.log("your submission");
 
-})
 
 
 
 goBackButton.addEventListener("click", function(){
     console.log("return to main page");
 
-
+    // need to return to the beginning
 })
 
 
 // add a click event to the button that will clear all data from localStorage
 clearScoresButton.addEventListener("click",function(){
-    console.log("clear this shit!");
+
+    console.log("clear this out NOW");
 
     localStorage.clear();
     // as well as removing from browser
     while(scoresGoHere.firstChild){
-        scoreKeeper.removeChild(scoresGoHere.firstChild);
+        scoresGoHere.removeChild(scoresGoHere.firstChild);
     }
 
 

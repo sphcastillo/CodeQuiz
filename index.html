@@ -29,18 +29,19 @@
 
 
     <!--The Quiz Question Template-->
-    <main>
+
 
         <!--Quiz Opening Page-->
-        <div class="container">
+    <div class="container">
 
-            <h1 id="letsStart">The Tudors</h1>
-            <p id="directions">Test your Tudor knowledge in this comprehensive Tudor Quiz! Learn even from wrong answers! Keep in mind that incorrect answers will penalize your score time by 10 seconds. Good luck!</p>
-            <a href="#" id="quizOpenerStartButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Start Quiz</a>
-        </div>
+        <h1 id="letsStart">The Tudors</h1>
+        <p id="directions">Test your Tudor knowledge in this comprehensive Tudor Quiz! Learn even from wrong answers! Keep in mind that incorrect answers will penalize your score time by 10 seconds. Good luck!</p>
+        <a href="#" id="quizOpenerStartButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Start Quiz</a>
+    </div>
 
 
     <!--Questions / Answer Options-->
+    <div class="container">
         <h5 id="theQuestion"></h5>
         <div class ="row">
             <div id="insideQuestionContent" class="col-8">
@@ -54,35 +55,37 @@
             </div>
         </div>
         <h3 id="theCorrectAnswer"></h3>
+    </div>
 
 
         <!--The User's Final Score-->
-        <div class="container">
-            <h1 id="done">All done!</h1>
-            <p>Your final score is: </p>
-            <p id="yourIndividualFinalScore"></p>
+    <div class="container">
+        <h1 id="done">All done!</h1>
+        <p>Your final score is: </p>
+        <p id="yourIndividualFinalScore"></p>
 
-            <div  id="savingUserName">
-                <label for="saveUserScore" id="letUsSaveUserScore">Enter your name: </label>
-                <input type="name" class="form-control" id="userName">
-            </div>
-            <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
-
+        <div  id="savingUserName">
+            <label for="saveUserScore" id="letUsSaveUserScore">Enter your name: </label>
+            <input type="name" class="form-control" id="userName">
         </div>
+        <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+
+    </div>
 
     
 <!--Page where you can view list of highest scores-->
 <!--Find options to restart or clear all data-->
-        <div class="highScores">
-            <h1>Highscores</h1>
-            <ul id="scoresGoHere">
+    <div class="container" id="highScores">
+        <h1>Highscores</h1>
+        <ul id="scoresGoHere">
 
-            </ul>
-            <button id="goBackButton" type="button" class="btn btn-primary">Go Back</button>
-            <button id="clearTheScores" type="button" class="btn btn-primary">Clear Highscores</button>
+        </ul>
 
-        </div>
-    </main>
+        <button id="goBackButton" type="button" class="btn btn-primary">Go Back</button>
+        <button id="clearTheScores" type="button" class="btn btn-primary">Clear Highscores</button>
+
+    </div>
+
 
 
 <script type="text/javascript" src="script.js"></script>
