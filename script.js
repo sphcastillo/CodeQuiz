@@ -106,6 +106,8 @@ var theStartButton = document.getElementById("quizOpenerStartButton");
 // Quiz Questions //
 var question = document.getElementById("theQuestion");
 
+var divHoldingTheAnswerOptions = document.getElementById("insideQuestionContent");
+
 var optionOne  = document.getElementById("firstOption");
 var optionTwo = document.getElementById("secondOption");
 var optionThree = document.getElementById("thirdOption");
@@ -135,6 +137,8 @@ var submitButton = document.getElementById("submitButton");
 
 var highScorePage = document.getElementsByClassName("highScores");
 
+var scoresGoHere = document.getElementById("scoresGoHere");
+
 var goBackButton = document.getElementById("goBackButton");
 var clearScoresButton = document.getElementById("clearTheScores");
 
@@ -143,6 +147,12 @@ var clearScoresButton = document.getElementById("clearTheScores");
 var score = 0;
 var index = 0;
 var secondsLeftOnTimer = 60;
+
+
+var namesArray = [];
+localStorage.setItem("names", JSON.stringify(namesArray));
+
+
 
 
 function startQuiz(){
@@ -240,9 +250,26 @@ function  answerIncorrect(){
 
 //userNameInput
 function scoreKeeper(){
-    localStorage.setItem("highscore", score);
+
+    var li = document.createElement("li");
+    li.textContent = text;
+    scoresGoHere.appendChild(li);
+
 
 }
+
+
+submitButton.addEventListener("click", function(){
+    console.log("your submission");
+
+    namesArray.push(userNameInput.value);
+    localStorage.setItem("names",JSON.stringify(namesArray));
+
+    scoreKeeper(userNameInput.value);
+    
+
+})
+
 
 
 
