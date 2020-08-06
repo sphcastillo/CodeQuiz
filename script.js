@@ -84,8 +84,6 @@ var QuizQuestionsAnswers = [
     
 
 
-
-
 // The header //
 var theNav =  document.getElementById("navigation");
 
@@ -99,7 +97,6 @@ var timerCountdown = document.getElementById("timerCountdown");
 var quizOpeningPage = document.getElementById("theOpeningPage");
 
 var theStartButton = document.getElementById("quizOpenerStartButton");
-
 
 
 
@@ -153,7 +150,6 @@ var index = 0;
 var secondsLeftOnTimer = 75;
 
 
-
 var namesArray = [];
 localStorage.setItem("names", JSON.stringify(namesArray));
 var data = JSON.parse(localStorage.getItem("names"));
@@ -161,7 +157,6 @@ var data = JSON.parse(localStorage.getItem("names"));
 
 var correctAnswerText = correctAnswer.textContent;
 correctAnswerText = QuizQuestionsAnswers[0].correct;
-
 
 
 
@@ -178,7 +173,6 @@ function startQuiz(){
 }
 
 
-
 function setTime(){
     
     var timerInterval =  setInterval(() => {
@@ -191,6 +185,12 @@ function setTime(){
         }
         
     }, 1000);
+}
+
+function stopTime(timerEnd) {
+    if(secondsLeftOnTimer <= 0) {
+
+    }
 }
 
 
@@ -230,9 +230,9 @@ function continueOn(){
     optionFour.innerHTML = QuizQuestionsAnswers[index].four;
 
 
-
-
 }
+
+
 
 function finalScorePage(){
     console.log("you have entered finalScorePage funcion");
@@ -242,37 +242,34 @@ function finalScorePage(){
 
     theFinalScore.textContent= score + "/" + QuizQuestionsAnswers.length;
 
-    
-
-
 }
 
 
 function openingPage(){
     console.log("back to opening page/ openingPage()");
 
-
     timerCountdown.removeAttribute("id","timerCountdown");
 
     quizOpeningPage.removeAttribute("class","showElement");
     pagesOfQuestionsandAnswers.setAttribute("class","hideElement");
 
-    setTime();
-
+    
     presentTheQuestions();
     
 }
 
 
-function scoreKeeper(text){
+function scoreKeeper(text, score){
     console.log("We have a name")
 
     var li = document.createElement("li");
     li.textContent = text;
     scoresGoHere.appendChild(li);
-
-
+    var spanEl = document.createElement("span")
+    spanEl.textContent = theFinalScore.textContent;
+    li.append(spanEl);
 }
+
 
 function computingScore(){
 
@@ -280,6 +277,7 @@ function computingScore(){
 
     namesArray.push(userNameInput.value);
     localStorage.setItem("names",JSON.stringify(namesArray));
+    theFinalScore.textContent
 
     scoreKeeper(userNameInput.value);
     userNameInput.value = "";
@@ -298,8 +296,6 @@ function ontoHighScoresPage(){
     finalUserScorePage.setAttribute("class", "hideElement");
     highScorePage.setAttribute("class", "showElement");
 
-
-
 }
 
 
@@ -316,16 +312,15 @@ submitButton.addEventListener("click", function(){
 
 viewHighScore.addEventListener("click", function(){
     console.log("view the competition");
+
+    quizOpeningPage.setAttribute("class", "hideElement");
+    quizOpeningPage.removeAttribute("id");
+    highScorePage.setAttribute("class","showElement");
 })
 
 
 
-theStartButton.addEventListener("click", function(){
-    
-
-    startQuiz();
-
-})
+theStartButton.addEventListener("click", startQuiz)
 
 
 
@@ -334,7 +329,8 @@ theStartButton.addEventListener("click", function(){
 goBackButton.addEventListener("click", function(){
     console.log("return to main page");
 
-    // need to return to the beginning
+    highScorePage.setAttribute("class","hideElement");
+    openingPage();
 })
 
 
@@ -352,18 +348,17 @@ clearScoresButton.addEventListener("click",function(){
 
 
 })
-
+    
 
 optionOne.addEventListener("click", function(e){
     e.preventDefault();
     
     if(this.textContent !=  QuizQuestionsAnswers[index].correct){
         console.log("wrong answer");
-        secondsLeftOnTimer -=10;
         if(secondsLeftOnTimer <= 0){
             secondsLeftOnTimer = 0;
-            openingPage();
-
+        } else {
+            
         }
     }
     else{
@@ -382,11 +377,10 @@ optionTwo.addEventListener("click", function(e){
 
     if(this.textContent !=  QuizQuestionsAnswers[index].correct){
         console.log("wrong answer");
-        secondsLeftOnTimer -=10;
         if(secondsLeftOnTimer <= 0){
             secondsLeftOnTimer = 0;
-            openingPage();
-
+        } else {
+            
         }
     }
     else{
@@ -404,11 +398,10 @@ optionThree.addEventListener("click", function(e){
 
     if(this.textContent !=  QuizQuestionsAnswers[index].correct){
         console.log("wrong answer");
-        secondsLeftOnTimer -=10;
         if(secondsLeftOnTimer <= 0){
             secondsLeftOnTimer = 0;
-            openingPage();
-
+        } else {
+            
         }
     }
     else{
@@ -429,11 +422,11 @@ optionFour.addEventListener("click", function(e){
 
     if(this.textContent !=  QuizQuestionsAnswers[index].correct){
         console.log("wrong answer");
-        secondsLeftOnTimer -=10;
+        
         if(secondsLeftOnTimer <= 0){
             secondsLeftOnTimer = 0;
-            openingPage();
-
+        } else {
+            //secondsLeftOnTimer -= 10
         }
     }
     else{
