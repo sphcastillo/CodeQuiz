@@ -5,15 +5,15 @@ var QuizQuestionsAnswers = [
     two : "1509-1568",
     three : "1464-1592",
     four : "1485-1603",
-    correct : 4
+    correct : "1485-1603"
     },
     {
-    question : "The marriage between Henry VII and ___________  in 1486 was seen as marking the end of the War of Roses",
+    question : "The marriage between Henry VII and ___________  in 1486 was seen as marking the end of the War of Roses.",
     one : "Mary Tudor",
     two : "Margaret Beaufort",
     three : "Elizabeth Woodville",
     four : "Elizabeth of York",
-    correct : 4
+    correct : "Elizabeth of York"
     },
     {
     question : "What Tudor reigned as queen for nine days (July 10-19, 1553)?",
@@ -21,7 +21,7 @@ var QuizQuestionsAnswers = [
     two : "Lady Frances Brandon",
     three : "Lady Jane Grey",
     four : "Margaret Douglas, Countess of Lennox",
-    correct : 1
+    correct : "Lady Jane Grey"
     },
     {
     question : "Henry VIII had an older brother, who married Catherine of Aragon and would have become king before him, had he not died. What was this brother's name?",
@@ -29,7 +29,7 @@ var QuizQuestionsAnswers = [
     two : "Arthur",
     three : "James",
     four : "William",
-    correct : 2
+    correct : "Arthur"
     },
     {
     question : "The houses of Lancaster and York were two rival branches of the royal House of ______________________",
@@ -37,7 +37,7 @@ var QuizQuestionsAnswers = [
     two : "Leicester",
     three : "Warwick",
     four : "Plantagenet",
-    correct : 4
+    correct : "Plantagenet"
     },
     {
     question : "Who was Henry VIII's sixth and last wife?",
@@ -45,7 +45,7 @@ var QuizQuestionsAnswers = [
     two : "Katherine Howard",
     three : "Catherine Parr",
     four : "Bessie Blount",
-    correct : 3
+    correct : "Catherine Parr"
     },
     {
     question : "On August 22, 1485, _________'s army fought against Henry Tudor's army at the Battle of Bosworth. Henry Tudor was the victor and became Henry VII of England.",
@@ -53,15 +53,15 @@ var QuizQuestionsAnswers = [
     two : "Richard III",
     three : "Edward VI",
     four : "George, Duke of Clarence",
-    correct : 2
+    correct : "Richard III"
     },
     {
-    question : "Historians acknowledge that Richard III is the most likely candidate to have orchestrated the murder of __________",
+    question : "Historians acknowledge that Richard III is the most likely candidate to have orchestrated the murder of __________.",
     one : "Mary, Queen of Scots",
     two : "Amy Robsart",
     three : "Henry VI of England",
     four : "the princes in the tower (Prince Richard and Prince Edward)",
-    correct : 4
+    correct : "the princes in the tower (Prince Richard and Prince Edward)"
     },
     {
     question : "Henry VIII believed the reason his first wife, Katherine of Aragon, had not produced a healthy son was because he was being punished by God. What verse in the Bible did he use to present his argument?",
@@ -69,7 +69,7 @@ var QuizQuestionsAnswers = [
     two : "A man who takes his dead brother's wife will bear only daughters",
     three : "A man who takes his dead brother's wife will only have one healthy child",
     four : "A man who takes a wife older than himself will bear no children",
-    correct : 1
+    correct : "A man who takes his brother's wife will bear no children"
     },
     {
     question : "Who was Henry VIII's fifth wife, the second to be beheaded?",
@@ -77,7 +77,7 @@ var QuizQuestionsAnswers = [
     two : "Katherine Howard",
     three : "Anne Boleyn",
     four : "Anne of Cleves",
-    correct : 2
+    correct : "Katherine Howard"
     }
         
     ];
@@ -87,7 +87,7 @@ var QuizQuestionsAnswers = [
 
 
 // The header //
-var theNav =  document.getElementsByClassName("container");
+var theNav =  document.getElementById("navigation");
 
 var viewHighScore = document.getElementById("viewHighScores");
 
@@ -96,7 +96,7 @@ var timerCountdown = document.getElementById("timerCountdown");
 
 // Quiz Opening Page // 
 
-//var quizOpeningPage = document.getElementsByClassName("quizOpenerPage");
+var quizOpeningPage = document.getElementById("theOpeningPage");
 
 var theStartButton = document.getElementById("quizOpenerStartButton");
 
@@ -104,6 +104,9 @@ var theStartButton = document.getElementById("quizOpenerStartButton");
 
 
 // Quiz Questions //
+
+var pagesOfQuestionsandAnswers = document.getElementById("questionsAndAnswers");
+
 var question = document.getElementById("theQuestion");
 
 var divHoldingTheAnswerOptions = document.getElementById("insideQuestionContent");
@@ -121,7 +124,8 @@ var showcaseCorrectAnswer = document.getElementById("theCorrectAnswer");
 
 // The User's Final Score  //  
 
-var finalUserScorePage = document.getElementsByClassName("container");
+var finalUserScorePage = document.getElementById("finalScorePage");
+
 var done = document.getElementById("done");
 
 var theFinalScore = document.getElementById("yourIndividualFinalScore");
@@ -146,7 +150,8 @@ var clearScoresButton = document.getElementById("clearTheScores");
 // Starting the quiz with the score of 0
 var score = 0;
 var index = 0;
-var secondsLeftOnTimer = 60;
+var secondsLeftOnTimer = 75;
+
 
 
 var namesArray = [];
@@ -154,28 +159,33 @@ localStorage.setItem("names", JSON.stringify(namesArray));
 var data = JSON.parse(localStorage.getItem("names"));
 
 
+var correctAnswerText = correctAnswer.textContent;
+correctAnswerText = QuizQuestionsAnswers[0].correct;
+
+
 
 
 function startQuiz(){
-    console.log("inside Start Quiz");
-    //  a timer starts
+
+    quizOpeningPage.removeAttribute("id");
+    pagesOfQuestionsandAnswers.setAttribute("class","showElement");
+    quizOpeningPage.setAttribute("class","hideElement");
     
     setTime();
-    // presented with a question
+    
 
     presentTheQuestions();
 }
 
 
-function setTime(){
 
-    console.log("inside setTime function");
+function setTime(){
     
     var timerInterval =  setInterval(() => {
         secondsLeftOnTimer --;
         timerCountdown.textContent = "Timer: " + secondsLeftOnTimer;
 
-        if(secondsLeftOnTimer === 0){
+        if(secondsLeftOnTimer === 0 ){
             clearInterval(timerInterval);
         
         }
@@ -185,71 +195,64 @@ function setTime(){
 
 
 function presentTheQuestions(){
-    console.log("let's see the questions");
+
 
     var i =  QuizQuestionsAnswers[index];
 
-    console.log(i);
-
+    
+    var textContent = question.textContent;
+    textContent = QuizQuestionsAnswers[0].question;
+    
+    
     question.innerHTML = i.question;
+    
     optionOne.innerHTML = i.one;
     optionTwo.innerHTML = i.two;
     optionThree.innerHTML = i.three;
     optionFour.innerHTML = i.four;
 
-
-    optionOne.addEventListener("click", function(e){
-        e.preventDefault();
-        console.log("option 1 works");
-        checkButtonAnswers();
-    })
-
-    optionTwo.addEventListener("click", function(e){
-        e.preventDefault();
-        console.log("option 2 works");
-        checkButtonAnswers();
-    })
-
-    optionThree.addEventListener("click", function(e){
-        e.preventDefault();
-        console.log("option 3 works");
-        checkButtonAnswers();
-    })
-
-    optionFour.addEventListener("click", function(e){
-        e.preventDefault();
-        console.log("option 4 works");
-        checkButtonAnswers();
-    })
 }
 
 
-function checkButtonAnswers(){
 
-    console.log("inside check button answers");
+function continueOn(){
 
-    // user's selection
-    // compare user's  selection to correct answer
 
-    // if statements
+    question.innerHTML = QuizQuestionsAnswers[index].question;
 
-    // if it is wrong, add additional time to the timer
+    optionOne.innerHTML = QuizQuestionsAnswers[index].one;
+    optionTwo.innerHTML = QuizQuestionsAnswers[index].two;
+    optionThree.innerHTML = QuizQuestionsAnswers[index].three;
+    optionFour.innerHTML = QuizQuestionsAnswers[index].four;
 
-    index ++;
+
+    // after loop is finished, you enter finalScorePage( )
+
+}
+
+function finalScorePage(){
+    console.log("you have entered finalScorePage funcion");
+
+
+}
+
+
+function openingPage(){
+    console.log("back to opening page")
+
+
+    timerCountdown.removeAttribute("id","timerCountdown");
+
+    quizOpeningPage.removeAttribute("class","showElement");
+    pagesOfQuestionsandAnswers.setAttribute("class","hideElement");
+
+    setTime();
+
     presentTheQuestions();
+    
 }
 
 
-// when  you get the incorrect answer
-function answerIncorrect(){
-
-    secondsLeftOnTimer  -= 10;
-
-    continueOn();
-}
-
-
-//userNameInput
 function scoreKeeper(text){
 
     var li = document.createElement("li");
@@ -257,7 +260,6 @@ function scoreKeeper(text){
     scoresGoHere.appendChild(li);
 
 }
-
 
 submitButton.addEventListener("click", function(){
     console.log("your submission");
@@ -277,8 +279,6 @@ submitButton.addEventListener("click", function(){
 })
 
 
-
-
 viewHighScore.addEventListener("click", function(){
     console.log("view the competition");
 })
@@ -286,7 +286,7 @@ viewHighScore.addEventListener("click", function(){
 
 
 theStartButton.addEventListener("click", function(){
-    console.log("let's begin");
+    
 
     startQuiz();
 
@@ -303,6 +303,7 @@ goBackButton.addEventListener("click", function(){
 })
 
 
+
 // add a click event to the button that will clear all data from localStorage
 clearScoresButton.addEventListener("click",function(){
 
@@ -316,3 +317,93 @@ clearScoresButton.addEventListener("click",function(){
 
 
 })
+
+
+optionOne.addEventListener("click", function(e){
+    e.preventDefault();
+    
+    if(this.textContent !=  QuizQuestionsAnswers[index].correct){
+        console.log("wrong answer");
+        secondsLeftOnTimer -=10;
+        if(secondsLeftOnTimer <= 0){
+            openingPage();
+
+        }
+    }
+    else{
+        score++;
+        console.log("score: ", score);
+    }
+    index++;
+    continueOn();
+    
+})
+
+
+
+optionTwo.addEventListener("click", function(e){
+    e.preventDefault();
+
+    if(this.textContent !=  QuizQuestionsAnswers[index].correct){
+        console.log("wrong answer");
+        secondsLeftOnTimer -=10;
+        if(secondsLeftOnTimer <= 0){
+            openingPage();
+
+        }
+    }
+    else{
+        score++;
+        console.log("score: ", score);
+    }
+    index++;
+    continueOn();
+
+})
+
+optionThree.addEventListener("click", function(e){
+    e.preventDefault();
+
+
+    if(this.textContent !=  QuizQuestionsAnswers[index].correct){
+        console.log("wrong answer");
+        secondsLeftOnTimer -=10;
+        if(secondsLeftOnTimer <= 0){
+            openingPage();
+
+        }
+    }
+    else{
+        score++;
+        console.log("score: ", score);
+    }
+
+    index++;
+    continueOn();
+
+})
+
+
+
+optionFour.addEventListener("click", function(e){
+    e.preventDefault();
+
+
+    if(this.textContent !=  QuizQuestionsAnswers[index].correct){
+        console.log("wrong answer");
+        secondsLeftOnTimer -=10;
+        if(secondsLeftOnTimer <= 0){
+            openingPage();
+
+        }
+    }
+    else{
+        score++;
+        console.log("score: ", score);
+    }
+
+    index++;
+    continueOn();
+
+})
+

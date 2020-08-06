@@ -15,7 +15,7 @@
 </head>
 <body>
     <!--The header that's one every page-->
-    <div class="container">
+    <div id="navigation">
         <div class="row">
             <div class="card-body d-flex justify-content-start col-md-6">
                 <a type="button" id="viewHighScores">View High Scores</a>
@@ -32,7 +32,7 @@
 
 
         <!--Quiz Opening Page-->
-    <div class="container">
+    <div id="theOpeningPage">
 
         <h1 id="letsStart">The Tudors</h1>
         <p id="directions">Test your Tudor knowledge in this comprehensive Tudor Quiz! Learn even from wrong answers! Keep in mind that incorrect answers will penalize your score time by 10 seconds. Good luck!</p>
@@ -41,16 +41,16 @@
 
 
     <!--Questions / Answer Options-->
-    <div class="container">
+    <div class="container" id="questionsAndAnswers">
         <h5 id="theQuestion"></h5>
         <div class ="row">
-            <div id="insideQuestionContent" class="col-8">
+            <div id="insideQuestionContent">
                 <div id="listofOptions" class="list-group">
                     <button id="firstOption" type="button" class="list-group-item list-group-item-action answerOption"></button>
                     <button id="secondOption" type="button" class="list-group-item list-group-item-action answerOption"></button>
                     <button id="thirdOption" type="button" class="list-group-item list-group-item-action answerOption"></button>
                     <button id="fourthOption" type="button" class="list-group-item list-group-item-action answerOption"></button>
-                    <!-- <button id="correct"></button> -->
+                    <div id="correct"></div>
                 </div>
             </div>
         </div>
@@ -59,8 +59,8 @@
 
 
         <!--The User's Final Score-->
-    <div class="container">
-        <h1 id="done">All done!</h1>
+    <div class="container" id="finalScorePage">
+        <h3 id="done">You have completed the quiz</h3>
         <p>Your final score is: </p>
         <p id="yourIndividualFinalScore"></p>
 
@@ -76,7 +76,7 @@
 <!--Page where you can view list of highest scores-->
 <!--Find options to restart or clear all data-->
     <div class="container" id="highScores">
-        <h1>Highscores</h1>
+        <h4>Highscores</h4>
         <ul id="scoresGoHere">
 
         </ul>

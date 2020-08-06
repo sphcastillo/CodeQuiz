@@ -1,7 +1,63 @@
-.container {
+.showElement {
+    display: block;
+}
+
+.hideElement {
     display: none;
 }
 
-.container:target {
+body {
+    text-align: center;
+}
+
+
+.container {
+    display: none;
+    width: 100%;
+    height: 300px;
+}
+
+#navigation {
     display: block;
+}
+
+#theOpeningPage {
+    display: block;
+}
+
+#quizOpenerStartButton {
+    background-color: forestgreen;
+
+}
+
+
+#theQuestion {
+    color: darkgreen;
+}
+
+#insideQuestionContent {
+    width: 50%;
+
+}
+
+.answerOption {
+    margin-left: 250px;
+}
+
+
+
+#scoresGoHere {
+    list-style-type: none;
+}
+
+#submitButton {
+    background-color: forestgreen;
+}
+
+#goBackButton {
+    background-color: forestgreen;
+}
+
+#clearTheScores {
+    background-color: forestgreen;
 }
