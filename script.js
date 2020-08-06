@@ -265,7 +265,7 @@ function openingPage(){
 
 
 function scoreKeeper(text){
-    console.log("Inside scoreKeeper function")
+    console.log("We have a name")
 
     var li = document.createElement("li");
     li.textContent = text;
@@ -276,7 +276,7 @@ function scoreKeeper(text){
 
 function computingScore(){
 
-    console.log("computing score");
+    console.log("doing work with the name");
 
     namesArray.push(userNameInput.value);
     localStorage.setItem("names",JSON.stringify(namesArray));
@@ -298,7 +298,6 @@ function ontoHighScoresPage(){
     finalUserScorePage.setAttribute("class", "hideElement");
     highScorePage.setAttribute("class", "showElement");
 
-    scoresGoHere.textContent = li + score;
 
 
 }
