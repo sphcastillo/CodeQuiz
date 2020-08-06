@@ -217,6 +217,10 @@ function presentTheQuestions(){
 
 function continueOn(){
 
+    if(QuizQuestionsAnswers.length === index){
+        finalScorePage();
+        return;
+    }
 
     question.innerHTML = QuizQuestionsAnswers[index].question;
 
@@ -226,19 +230,26 @@ function continueOn(){
     optionFour.innerHTML = QuizQuestionsAnswers[index].four;
 
 
-    // after loop is finished, you enter finalScorePage( )
+
 
 }
 
 function finalScorePage(){
     console.log("you have entered finalScorePage funcion");
 
+    pagesOfQuestionsandAnswers.setAttribute("class","hideElement");
+    finalUserScorePage.setAttribute("class", "showElement");
+
+    theFinalScore.textContent= score + "/" + QuizQuestionsAnswers.length;
+
+    
+
 
 }
 
 
 function openingPage(){
-    console.log("back to opening page")
+    console.log("back to opening page/ openingPage()");
 
 
     timerCountdown.removeAttribute("id","timerCountdown");
@@ -254,15 +265,18 @@ function openingPage(){
 
 
 function scoreKeeper(text){
+    console.log("Inside scoreKeeper function")
 
     var li = document.createElement("li");
     li.textContent = text;
     scoresGoHere.appendChild(li);
 
+
 }
 
-submitButton.addEventListener("click", function(){
-    console.log("your submission");
+function computingScore(){
+
+    console.log("computing score");
 
     namesArray.push(userNameInput.value);
     localStorage.setItem("names",JSON.stringify(namesArray));
@@ -275,6 +289,28 @@ submitButton.addEventListener("click", function(){
         console.log("name", name);
     })
 
+
+}
+
+function ontoHighScoresPage(){
+    console.log("inside high scores function");
+
+    finalUserScorePage.setAttribute("class", "hideElement");
+    highScorePage.setAttribute("class", "showElement");
+
+    scoresGoHere.textContent = li + score;
+
+
+}
+
+
+submitButton.addEventListener("click", function(){
+    console.log("your submission");
+
+    scoreKeeper();
+    computingScore();
+
+    ontoHighScoresPage();
 
 })
 
@@ -326,6 +362,7 @@ optionOne.addEventListener("click", function(e){
         console.log("wrong answer");
         secondsLeftOnTimer -=10;
         if(secondsLeftOnTimer <= 0){
+            secondsLeftOnTimer = 0;
             openingPage();
 
         }
@@ -348,6 +385,7 @@ optionTwo.addEventListener("click", function(e){
         console.log("wrong answer");
         secondsLeftOnTimer -=10;
         if(secondsLeftOnTimer <= 0){
+            secondsLeftOnTimer = 0;
             openingPage();
 
         }
@@ -369,6 +407,7 @@ optionThree.addEventListener("click", function(e){
         console.log("wrong answer");
         secondsLeftOnTimer -=10;
         if(secondsLeftOnTimer <= 0){
+            secondsLeftOnTimer = 0;
             openingPage();
 
         }
@@ -393,6 +432,7 @@ optionFour.addEventListener("click", function(e){
         console.log("wrong answer");
         secondsLeftOnTimer -=10;
         if(secondsLeftOnTimer <= 0){
+            secondsLeftOnTimer = 0;
             openingPage();
 
         }
