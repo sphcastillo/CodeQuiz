@@ -148,7 +148,7 @@ var clearScoresButton = document.getElementById("clearTheScores");
 
 var score = 0;
 var index = 0;
-var secondsLeftOnTimer = 75;
+var secondsLeftOnTimer = 90;
 
 
 var gameHighScores = JSON.parse(localStorage.getItem("gameHighScore")) || []
@@ -312,7 +312,7 @@ function resetTheVariables(){
 
     score = 0;
     index = 0;
-    secondsLeftOnTimer = 75;
+    secondsLeftOnTimer = 90;
 
     //if you click the start button
 
