@@ -150,9 +150,10 @@ var index = 0;
 var secondsLeftOnTimer = 75;
 
 
-var namesArray = [];
-localStorage.setItem("names", JSON.stringify(namesArray));
-var data = JSON.parse(localStorage.getItem("names"));
+var gameHighScores = JSON.parse(localStorage.getItem("gameHighScore")) || []
+
+console.log("game high score", gameHighScores);
+
 
 
 var correctAnswerText = correctAnswer.textContent;
@@ -246,6 +247,7 @@ function finalScorePage(){
 
 
 function openingPage(){
+
     console.log("back to opening page/ openingPage()");
 
     timerCountdown.removeAttribute("id","timerCountdown");
@@ -259,15 +261,20 @@ function openingPage(){
 }
 
 
-function scoreKeeper(text, score){
+function scoreKeeper(highScore){
     console.log("We have a name")
 
-    var li = document.createElement("li");
-    li.textContent = text;
-    scoresGoHere.appendChild(li);
-    var spanEl = document.createElement("span")
-    spanEl.textContent = theFinalScore.textContent;
-    li.append(spanEl);
+    for(var i = 0; i < highScore.length; i ++){
+
+        var li = document.createElement("li");
+        li.textContent = highScore[i].name;
+        scoresGoHere.appendChild(li);
+        var spanEl = document.createElement("span")
+        spanEl.textContent = highScore[i].score;
+        li.append(spanEl);
+        
+    }
+
 }
 
 
@@ -275,17 +282,22 @@ function computingScore(){
 
     console.log("doing work with the name");
 
-    namesArray.push(userNameInput.value);
-    localStorage.setItem("names",JSON.stringify(namesArray));
-    theFinalScore.textContent
+    var highScoreProp = {
+        name: "",
+        score: 0
+    
+    }
+    highScoreProp.name = userNameInput.value + " ";
+    highScoreProp.score = score;
+    
+    gameHighScores.push(highScoreProp);
+    
+    localStorage.setItem("gameHighScore",JSON.stringify(gameHighScores));
 
-    scoreKeeper(userNameInput.value);
+
+
+    scoreKeeper(gameHighScores);
     userNameInput.value = "";
-
-    data.forEach(function(name){
-        scoreKeeper(name);
-        console.log("name", name);
-    })
 
 
 }
@@ -296,13 +308,14 @@ function ontoHighScoresPage(){
     finalUserScorePage.setAttribute("class", "hideElement");
     highScorePage.setAttribute("class", "showElement");
 
+
+
 }
 
 
 submitButton.addEventListener("click", function(){
     console.log("your submission");
 
-    scoreKeeper();
     computingScore();
 
     ontoHighScoresPage();
@@ -357,8 +370,9 @@ optionOne.addEventListener("click", function(e){
         console.log("wrong answer");
         if(secondsLeftOnTimer <= 0){
             secondsLeftOnTimer = 0;
+            openingPage();
         } else {
-            
+            secondsLeftOnTimer -= 10;
         }
     }
     else{
@@ -379,8 +393,9 @@ optionTwo.addEventListener("click", function(e){
         console.log("wrong answer");
         if(secondsLeftOnTimer <= 0){
             secondsLeftOnTimer = 0;
+            openingPage();
         } else {
-            
+            secondsLeftOnTimer -= 10;
         }
     }
     else{
@@ -400,8 +415,9 @@ optionThree.addEventListener("click", function(e){
         console.log("wrong answer");
         if(secondsLeftOnTimer <= 0){
             secondsLeftOnTimer = 0;
+            openingPage();
         } else {
-            
+            secondsLeftOnTimer -= 10;
         }
     }
     else{
@@ -425,8 +441,9 @@ optionFour.addEventListener("click", function(e){
         
         if(secondsLeftOnTimer <= 0){
             secondsLeftOnTimer = 0;
+            openingPage();
         } else {
-            //secondsLeftOnTimer -= 10
+            secondsLeftOnTimer -= 10;
         }
     }
     else{
