@@ -145,6 +145,7 @@ var clearScoresButton = document.getElementById("clearTheScores");
 
 
 // Starting the quiz with the score of 0
+
 var score = 0;
 var index = 0;
 var secondsLeftOnTimer = 75;
@@ -153,7 +154,6 @@ var secondsLeftOnTimer = 75;
 var gameHighScores = JSON.parse(localStorage.getItem("gameHighScore")) || []
 
 console.log("game high score", gameHighScores);
-
 
 
 var correctAnswerText = correctAnswer.textContent;
@@ -188,12 +188,6 @@ function setTime(){
     }, 1000);
 }
 
-function stopTime(timerEnd) {
-    if(secondsLeftOnTimer <= 0) {
-
-    }
-}
-
 
 function presentTheQuestions(){
 
@@ -219,6 +213,7 @@ function presentTheQuestions(){
 function continueOn(){
 
     if(QuizQuestionsAnswers.length === index){
+        
         finalScorePage();
         return;
     }
@@ -255,14 +250,15 @@ function openingPage(){
     quizOpeningPage.removeAttribute("class","showElement");
     pagesOfQuestionsandAnswers.setAttribute("class","hideElement");
 
-    
+    resetTheVariables();
+    setTime();
     presentTheQuestions();
     
 }
 
 
 function scoreKeeper(highScore){
-    console.log("We have a name")
+    console.log("We have a name");
 
     for(var i = 0; i < highScore.length; i ++){
 
@@ -309,8 +305,22 @@ function ontoHighScoresPage(){
     highScorePage.setAttribute("class", "showElement");
 
 
+}
+
+function resetTheVariables(){
+    console.log("resetting our variables");
+
+    score = 0;
+    index = 0;
+    secondsLeftOnTimer = 75;
+
+    //if you click the start button
 
 }
+
+
+
+// Event Listeners //
 
 
 submitButton.addEventListener("click", function(){
@@ -343,6 +353,7 @@ goBackButton.addEventListener("click", function(){
     console.log("return to main page");
 
     highScorePage.setAttribute("class","hideElement");
+
     openingPage();
 })
 
