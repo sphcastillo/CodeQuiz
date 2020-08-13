@@ -1,4 +1,5 @@
 var QuizQuestionsAnswers = [
+    
     {
     question : "What was the date range of the Tudor Dynasty?",
     one : "1461-1489",
@@ -79,15 +80,23 @@ var QuizQuestionsAnswers = [
     four : "Anne of Cleves",
     correct : "Katherine Howard"
     }
+
     ];
+
+
 // The header //
+
 var theNav =  document.getElementById("navigation");
 var viewHighScore = document.getElementById("viewHighScores");
 var timerCountdown = document.getElementById("timerCountdown");
+
 // Quiz Opening Page // 
+
 var quizOpeningPage = document.getElementById("theOpeningPage");
 var theStartButton = document.getElementById("quizOpenerStartButton");
+
 // Quiz Questions //
+
 var pagesOfQuestionsandAnswers = document.getElementById("questionsAndAnswers");
 var question = document.getElementById("theQuestion");
 var divHoldingTheAnswerOptions = document.getElementById("insideQuestionContent");
@@ -97,7 +106,9 @@ var optionThree = document.getElementById("thirdOption");
 var optionFour = document.getElementById("fourthOption");
 var correctAnswer = document.getElementById("correct");
 var showcaseCorrectAnswer = document.getElementById("theCorrectAnswer");
+
 // The User's Final Score  //  
+
 var finalUserScorePage = document.getElementById("finalScorePage");
 var done = document.getElementById("done");
 var theFinalScore = document.getElementById("yourIndividualFinalScore");
@@ -105,142 +116,237 @@ var savingUserName = document.getElementById("savingUserName");
 var labeltoInputUserName = document.getElementById("letUsSaveUserScore");
 var userNameInput = document.getElementById("userName");
 var submitButton = document.getElementById("submitButton");
+
 // Viewing list of the highest scores //
+
 var highScorePage = document.getElementById("highScores");
 var scoresGoHere = document.getElementById("scoresGoHere");
 var goBackButton = document.getElementById("goBackButton");
 var clearScoresButton = document.getElementById("clearTheScores");
+
 // Starting the quiz with the score of 0
+
+
 var score = 0;
 var index = 0;
 var secondsLeftOnTimer = 90;
+
+
 var gameHighScores = JSON.parse(localStorage.getItem("gameHighScore")) || []
 console.log("game high score", gameHighScores);
+
 var correctAnswerText = correctAnswer.textContent;
 correctAnswerText = QuizQuestionsAnswers[0].correct;
+
+
 function startQuiz(){
+
     quizOpeningPage.removeAttribute("id");
     pagesOfQuestionsandAnswers.setAttribute("class","showElement");
     quizOpeningPage.setAttribute("class","hideElement");
+
     setTime();
+
     presentTheQuestions();
+
 }
+
+
 function setTime(){
+
     var timerInterval =  setInterval(() => {
         secondsLeftOnTimer --;
         timerCountdown.textContent = "Timer: " + secondsLeftOnTimer;
+
         if(secondsLeftOnTimer <= 0 ){
             clearInterval(timerInterval);
             secondsLeftOnTimer = 0
             timerCountdown.textContent = "Timer: " + secondsLeftOnTimer;
         }
     }, 1000);
+
 }
+
+
 function presentTheQuestions(){
+
     var i =  QuizQuestionsAnswers[index];
     var textContent = question.textContent;
     textContent = QuizQuestionsAnswers[0].question;
+
     question.innerHTML = i.question;
     optionOne.innerHTML = i.one;
     optionTwo.innerHTML = i.two;
     optionThree.innerHTML = i.three;
     optionFour.innerHTML = i.four;
+
 }
+
+
 function continueOn(){
+
     if(QuizQuestionsAnswers.length === index){
+
         finalScorePage();
         return;
+
     }
+
     question.innerHTML = QuizQuestionsAnswers[index].question;
     optionOne.innerHTML = QuizQuestionsAnswers[index].one;
     optionTwo.innerHTML = QuizQuestionsAnswers[index].two;
     optionThree.innerHTML = QuizQuestionsAnswers[index].three;
     optionFour.innerHTML = QuizQuestionsAnswers[index].four;
+
 }
+
+
 function finalScorePage(){
+
     console.log("you have entered finalScorePage funcion");
+
     pagesOfQuestionsandAnswers.setAttribute("class","hideElement");
     finalUserScorePage.setAttribute("class", "showElement");
+
     secondsLeftOnTimer = 0;
+
     theFinalScore.textContent= score + "/" + QuizQuestionsAnswers.length;
+
 }
 function openingPage(){
+
     console.log("back to opening page/ openingPage()");
+    
     timerCountdown.removeAttribute("id","timerCountdown");
     quizOpeningPage.removeAttribute("class","showElement");
     pagesOfQuestionsandAnswers.setAttribute("class","hideElement");
+
     resetTheVariables();
-    // setTime();
+
     presentTheQuestions();
+
 }
 function scoreKeeper(){
-    console.log("We have a name");
+
     for(var i = 0; i < gameHighScores.length; i ++){
+
         console.log(gameHighScores)
+
         var li = document.createElement("li");
         li.textContent = gameHighScores[i].name;
         var spanEl = document.createElement("span")
         spanEl.textContent = gameHighScores[i].score;
         li.append(spanEl);
         scoresGoHere.appendChild(li);
+
     }
+
 }
+
+
 function computingScore(){
+
     console.log("doing work with the name");
+
     var highScoreProp = {
         name: "",
         score: 0
     }
+
     highScoreProp.name = userNameInput.value + " ";
     highScoreProp.score = score;
+
     gameHighScores.push(highScoreProp);
     localStorage.setItem("gameHighScore",JSON.stringify(gameHighScores));
     userNameInput.value = "";
+
 }
+
 function ontoHighScoresPage(){
+
     console.log("inside high scores function");
+
     finalUserScorePage.setAttribute("class", "hideElement");
     highScorePage.setAttribute("class", "showElement");
+
 }
+
+
 function resetTheVariables(){
+
     console.log("resetting our variables");
+
     score = 0;
     index = 0;
     secondsLeftOnTimer = 90;
     //if you click the start button
+
 }
+
 // Event Listeners //
+
 submitButton.addEventListener("click", function(){
+
     console.log("your submission");
+
     computingScore();
     ontoHighScoresPage();
+
 })
+
+
 viewHighScore.addEventListener("click", function(){
+
     console.log("view the competition");
+
     quizOpeningPage.setAttribute("class", "hideElement");
     quizOpeningPage.removeAttribute("id");
     highScorePage.setAttribute("class","showElement");
+
 })
-theStartButton.addEventListener("click", startQuiz)
+
+
+theStartButton.addEventListener("click", startQuiz);
+
+
 goBackButton.addEventListener("click", function(){
+
     console.log("return to main page");
+
     highScorePage.setAttribute("class","hideElement");
+
     openingPage();
+
 })
+
+
 // add a click event to the button that will clear all data from localStorage
+
 clearScoresButton.addEventListener("click",function(){
+
     console.log("clear this out NOW");
+
     localStorage.clear();
+
     // as well as removing from browser
     while(scoresGoHere.firstChild){
+
         scoresGoHere.removeChild(scoresGoHere.firstChild);
     }
+
 })
+
+
 optionOne.addEventListener("click", function(e){
+
+    console.log(secondsLeftOnTimer);
+
     e.preventDefault();
-    console.log(secondsLeftOnTimer)
+   
     if(this.textContent !=  QuizQuestionsAnswers[index].correct){
+
         console.log("wrong answer");
+
         if(secondsLeftOnTimer < 0){
             console.log("does this run?")
             secondsLeftOnTimer = 0;
@@ -253,13 +359,20 @@ optionOne.addEventListener("click", function(e){
         score++;
         console.log("score: ", score);
     }
+
     index++;
     continueOn();
+
 })
+
 optionTwo.addEventListener("click", function(e){
+
+    console.log(secondsLeftOnTimer);
+
     e.preventDefault();
-    console.log(secondsLeftOnTimer)
+    
     if(this.textContent !=  QuizQuestionsAnswers[index].correct){
+
         console.log("wrong answer");
         if(secondsLeftOnTimer < 0){
             console.log("does this run?")
@@ -273,14 +386,23 @@ optionTwo.addEventListener("click", function(e){
         score++;
         console.log("score: ", score);
     }
+
     index++;
     continueOn();
+
 })
+
+
 optionThree.addEventListener("click", function(e){
+
+    console.log(secondsLeftOnTimer);
+
     e.preventDefault();
-    console.log(secondsLeftOnTimer)
+    
     if(this.textContent !=  QuizQuestionsAnswers[index].correct){
+
         console.log("wrong answer");
+
         if(secondsLeftOnTimer < 0){
             console.log("does this run?")
             secondsLeftOnTimer = 0;
@@ -293,14 +415,23 @@ optionThree.addEventListener("click", function(e){
         score++;
         console.log("score: ", score);
     }
+
     index++;
     continueOn();
+
 })
+
+
 optionFour.addEventListener("click", function(e){
+
+    console.log(secondsLeftOnTimer);
+
     e.preventDefault();
-    console.log(secondsLeftOnTimer)
+    
     if(this.textContent !=  QuizQuestionsAnswers[index].correct){
+
         console.log("wrong answer");
+
         if(secondsLeftOnTimer <= 0){
             console.log("does this run?")
             console.log(secondsLeftOnTimer)
@@ -316,7 +447,11 @@ optionFour.addEventListener("click", function(e){
         score++;
         console.log("score: ", score);
     }
+
     index++;
     continueOn();
+
 })
-scoreKeeper()
+
+
+scoreKeeper();
